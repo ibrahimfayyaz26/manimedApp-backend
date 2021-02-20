@@ -23,14 +23,16 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/post", (req, res) => {
+router.post("/", (req, res) => {
   const newMani = new Manimed({
     name: req.body.name,
     imageUri: req.body.imageUri,
     code: req.body.code,
     size: req.body.size,
+    stuff: req.body.stuff,
     category: req.body.category,
     subCategory: req.body.subCategory,
+    subId: req.body.subId,
   });
   newMani
     .save()
