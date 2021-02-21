@@ -12,6 +12,18 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/:subCategory", (req, res) => {
+  const cat = req.params.subCategory;
+  Manimed.find()
+    .then((result) => {
+      const data = result.filter((d) => d.subCategory == cat);
+      res.send(data);
+    })
+    .catch((er) => {
+      console.log(er);
+    });
+});
+
 router.get("/:id", (req, res) => {
   const id = req.params.id;
   Manimed.findById(id)
