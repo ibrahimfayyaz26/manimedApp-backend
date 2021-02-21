@@ -12,6 +12,18 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/:subCategory", (req, res) => {
+  const cat = req.params.subCategory;
+  Manimed.find()
+    .then((result) => {
+      const data = result.filter((d) => d.subCategory == cat);
+      res.send(data);
+    })
+    .catch((er) => {
+      console.log(er);
+    });
+});
+
 router.get("/:id", (req, res) => {
   const id = req.params.id;
   Manimed.findById(id)
@@ -23,14 +35,16 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/post", (req, res) => {
+router.post("/", (req, res) => {
   const newMani = new Manimed({
     name: req.body.name,
     imageUri: req.body.imageUri,
     code: req.body.code,
     size: req.body.size,
+    stuff: req.body.stuff,
     category: req.body.category,
     subCategory: req.body.subCategory,
+    subId: req.body.subId,
   });
   newMani
     .save()
